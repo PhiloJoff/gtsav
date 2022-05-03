@@ -19,14 +19,22 @@ import java.util.UUID;
 public class MaintenanceOperationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "mop_id")
     private UUID id ;
 
     @Temporal(TemporalType.DATE)
-    private Date dateMaintenance;
+    @Column(name = "mop_maintenance_date")
+    private Date maintenanceDate;
 
     @NotNull
     @NotEmpty
+    @Column(name = "mop_description")
     private String description;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tic_id")
+    private TicketEntity ticket;
 
 
 

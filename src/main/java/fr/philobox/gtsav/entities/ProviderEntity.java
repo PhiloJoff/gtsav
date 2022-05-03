@@ -18,10 +18,12 @@ import java.util.UUID;
 public class ProviderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "pro_id")
     private UUID id ;
 
     @NotNull
     @NotEmpty
+    @Column(name = "pro_name")
     private String name;
 
 

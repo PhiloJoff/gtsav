@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,20 +19,21 @@ import java.util.UUID;
 public class ModelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "mod_id")
     private UUID id ;
 
     @NotNull
     @NotEmpty
+    @Column(name = "mod_name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sup_id")
     private SupplierEntity supplier;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateCreation;
-
-    @Temporal(TemporalType.DATE)
-    private Date dateModification;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "model")
+    private List<TicketEntity> tickets;
 
 
 }

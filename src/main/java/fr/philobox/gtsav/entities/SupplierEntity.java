@@ -20,18 +20,15 @@ import java.util.UUID;
 public class SupplierEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "sup_id")
     private UUID id ;
 
-    @NotNull(message = "Name is mandatory")
-    @NotEmpty(message = "Name can't be empty")
+    @NotNull
+    @NotEmpty
+    @Column(name = "sup_name")
     private String name;
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
     private List<ModelEntity> models;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateCreation;
-
-    @Temporal(TemporalType.DATE)
-    private Date dateModification;
 }

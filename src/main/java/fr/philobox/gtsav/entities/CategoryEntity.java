@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,11 +18,16 @@ import java.util.UUID;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "cat_id")
     private UUID id ;
 
     @NotNull
     @NotEmpty
+    @Column(name= "cat_name")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private List<SectionEntity> sections;
 
 
 

@@ -17,13 +17,18 @@ import java.util.UUID;
 public class SectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "sec_id")
     private UUID id ;
 
     @NotNull
     @NotEmpty
+    @Column(name = "sec_name")
     private String name;
 
-
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cat_id")
+    private CategoryEntity category;
 
 
 }
