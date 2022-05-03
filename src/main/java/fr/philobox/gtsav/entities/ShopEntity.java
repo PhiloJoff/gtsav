@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ShopEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "sho_name")
+    @Column(name = "sho_id")
     private UUID id ;
 
     @NotNull
