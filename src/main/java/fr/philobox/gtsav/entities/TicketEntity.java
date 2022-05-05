@@ -1,5 +1,6 @@
 package fr.philobox.gtsav.entities;
 
+import fr.philobox.gtsav.enums.TicketState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,11 +53,11 @@ public class TicketEntity {
     @NotNull
     @NotEmpty
     @Column(name = "TIC_STATE")
-    private char state;
+    private TicketState ticketState;
 
     @NotNull
     @NotEmpty
-    @Column(name = "TIC_WARRANTY")
+    @Column(name = "TIC_WARRANTY", length = 2)
     private char warranty;
 
     @NotNull
