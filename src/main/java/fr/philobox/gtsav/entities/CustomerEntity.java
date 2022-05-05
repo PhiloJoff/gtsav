@@ -16,36 +16,36 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="cus_customer")
+@Table(name="CUS_CUSTOMER")
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cus_id")
+    @Column(name = "CUS_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "cus_firstname")
+    @Column(name = "CUS_FIRSTNAME", length = 50)
     private String firstname;
 
     @NotNull
     @NotEmpty
-    @Column(name = "cus_lastname")
+    @Column(name = "CUS_LASTNAME", length = 50)
     private String lastname;
 
     @NotNull
     @NotEmpty
-    @Column(name = "cus_tel")
+    @Column(name = "CUS_TEL", length = 10)
     private String tel;
 
     @NotNull
     @Email
-    @Column(name = "cus_email")
+    @Column(name = "CUS_EMAIL", length = 50)
     private String email;
 
     @NotNull
     @NotEmpty
-    @Column(name = "cus_address")
+    @Column(name = "CUS_ADDRESS", length = 200)
     private String address;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")

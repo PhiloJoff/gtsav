@@ -15,25 +15,25 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="mop_maintenance_operation")
+@Table(name="MOP_MAINTENANCE_OPERATION")
 public class MaintenanceOperationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "mop_id")
+    @Column(name = "MOP_ID")
     private UUID id ;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "mop_maintenance_date")
+    @Column(name = "MOP_MAINTENANCE_DATE")
     private Date maintenanceDate;
 
     @NotNull
     @NotEmpty
-    @Column(name = "mop_description")
+    @Column(name = "MOP_DESCRIPTION", length = 200)
     private String description;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tic_id")
+    @JoinColumn(name = "TIC_ID")
     private TicketEntity ticket;
 
 

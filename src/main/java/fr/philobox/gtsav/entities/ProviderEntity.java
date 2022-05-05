@@ -14,16 +14,16 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="pro_provider")
+@Table(name="PRO_PROVIDER")
 public class ProviderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "pro_id")
+    @Column(name = "PRO_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "pro_name")
+    @Column(name = "PRO_NAME", length = 50)
     private String name;
 
 

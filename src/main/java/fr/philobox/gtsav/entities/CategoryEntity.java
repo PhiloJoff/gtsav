@@ -14,16 +14,16 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="cat_category")
+@Table(name="CAT_CATEGORY")
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cat_id")
+    @Column(name = "CAT_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name= "cat_name")
+    @Column(name= "CAT_NAME", length = 50)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")

@@ -13,21 +13,21 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="sec_section")
+@Table(name="SEC_SECTION")
 public class SectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "sec_id")
+    @Column(name = "SEC_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "sec_name")
+    @Column(name = "SEC_NAME", length = 50)
     private String name;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id")
+    @JoinColumn(name = "CAT_ID")
     private CategoryEntity category;
 
 

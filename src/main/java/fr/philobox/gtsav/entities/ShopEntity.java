@@ -15,16 +15,16 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="sho_shop")
+@Table(name="SHO_SHOP")
 public class ShopEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "sho_id")
+    @Column(name = "SHO_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "sho_name")
+    @Column(name = "SHO_NAME", length = 50)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shop")

@@ -14,69 +14,64 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="tic_ticket")
+@Table(name="TIC_TICKET")
 public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tic_id")
+    @Column(name = "TIC_ID")
     private UUID id ;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "tic_open_date")
+    @Column(name = "TIC_OPEN_DATE")
     private Date openDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "tic_close_date")
+    @Column(name = "TIC_CLOSE_DATE")
     private Date closeDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "tic_contact_date")
+    @Column(name = "TIC_CONTACT_DATE")
     private Date contactDate;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tic_description")
+    @Column(name = "TIC_DESCRIPTION")
     private String description;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tic_extra_information")
+    @Column(name = "TIC_EXTRA_INFORMATION")
     private String extraInformation;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tic_contact_type")
+    @Column(name = "TIC_CONTACT_TYPE")
     private String contactType;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tic_state")
+    @Column(name = "TIC_STATE")
     private char state;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tic_warranty")
+    @Column(name = "TIC_WARRANTY")
     private char warranty;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mod_id")
+    @JoinColumn(name = "MOD_ID")
     private ModelEntity model;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cus_id")
+    @JoinColumn(name = "CUS_ID")
     private CustomerEntity customer;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sho_id")
+    @JoinColumn(name = "SHO_ID")
     private ShopEntity shop;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tit_id")
-    private TypeItemEntity typeItem;
 
 
 
