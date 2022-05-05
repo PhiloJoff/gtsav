@@ -45,8 +45,9 @@ public class TicketEntity {
 
     @NotNull
     @NotEmpty
-    @Column(name = "TIC_CONTACT_TYPE")
-    private String contactType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CON_ID")
+    private ContactEntity contact;
 
     @NotNull
     @NotEmpty
