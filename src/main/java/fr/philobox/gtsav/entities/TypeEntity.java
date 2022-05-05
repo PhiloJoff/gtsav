@@ -14,20 +14,17 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="tit_type_item")
-public class TypeItemEntity {
+@Table(name="TYP_TYPE")
+public class TypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tit_id")
+    @Column(name = "TYP_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "tit_name")
+    @Column(name = "TYP_NAME")
     private String name;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeItem")
-    private List<TicketEntity> tickets;
 
 
 

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,25 +15,29 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="mod_model")
+@Table(name="MOD_MODEL")
 public class ModelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "mod_id")
+    @Column(name = "MOD_ID")
     private UUID id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "mod_name")
+    @Column(name = "MOD_NAME", length = 50)
     private String name;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sup_id")
+    @JoinColumn(name = "SUP_ID")
     private SupplierEntity supplier;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "model")
     private List<TicketEntity> tickets;
+
+    @ManyToMany
+    @JoinTable(name = "MODEL_TYPE", joinColumns = { @JoinColumn(name = "MOD_ID") }, inverseJoinColumns = { @JoinColumn(name = "TYP_ID") })
+    private List<TypeEntity> types;
 
 
 }
