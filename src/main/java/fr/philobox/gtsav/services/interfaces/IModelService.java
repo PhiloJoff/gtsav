@@ -7,11 +7,11 @@ import fr.philobox.gtsav.repositories.ModelRepository;
 import java.util.UUID;
 
 public interface IModelService {
-    public ModelEntity addModel(ModelEntity model);
-    public boolean deleteModel(UUID id);
-    public ModelEntity editModel(ModelEntity model);
+    ModelEntity addModel(ModelEntity model);
+    boolean deleteModel(UUID id);
+    ModelEntity editModel(ModelEntity model);
 
-    public ModelEntity findModelByName(String name);
+    ModelEntity findModelByName(String name);
 
 
 }
