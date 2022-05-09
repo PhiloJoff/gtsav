@@ -24,7 +24,7 @@ public class ModelEntity {
 
     @NotNull
     @NotEmpty
-    @Column(name = "MOD_NAME", length = 50)
+    @Column(name = "MOD_NAME", length = 50, unique = true)
     private String name;
 
     @NotNull

@@ -12,9 +12,8 @@ public interface IModelService {
     ModelEntity addModel(ModelEntity model);
     boolean deleteModel(UUID id);
     ModelEntity editModel(ModelEntity model);
-    List<ModelEntity> findAllModel();
     ModelEntity findModelByName(String name);
-    Page<ModelEntity> findAllModel(PageRequest pageRequest);
-    Page<ModelEntity> findAllModel(Pageable pageable);
+    Page<ModelEntity> findAllModel(Pageable Pageable);
+    Page<ModelEntity> findAllModelByNameContains(String name, Pageable pageable);
 
 }

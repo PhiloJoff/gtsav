@@ -53,17 +53,12 @@ public class ModelManagementService implements IModelService, ISupplierService {
     }
 
     @Override
-    public List<ModelEntity> findAllModel() {
-        return modelRepository.findAll();
+    public Page<ModelEntity> findAllModel(Pageable pageable) {
+        return modelRepository.findAll(pageable);
     }
 
     @Override
-    public Page<ModelEntity> findAllModel(PageRequest pageRequest) {
-        return modelRepository.findAll(pageRequest);
-    }
-
-    @Override
-    public Page<ModelEntity> findAllModel(Pageable pageable) { return modelRepository.findAll(pageable); }
+    public Page<ModelEntity> findAllModelByNameContains(String name, Pageable pageable) { return modelRepository.findAllByNameContains(name, pageable); }
 
     @Override
     public SupplierEntity addSupplier(SupplierEntity supplier) {
