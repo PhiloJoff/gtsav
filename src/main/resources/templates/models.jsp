@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td th:if="${false}" th:text="est"></td>
-                <form action="#" th:action="@{/models}" method="post">
+                <form id="modelForm" action="#" th:action="@{/models}" method="post">
                     <td class="input-group">
                         <div class="input-group-prepend">
                             <button id="name-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
@@ -25,7 +25,16 @@
                         <input type="text" class="form-control" placeholder="Chercher" aria-label="Name" name="name" th:value="${name}">
                     </td>
                 </form>
-                <td th:text="test"></td>
+                <form id="supplierForm" action="#" th:action="@{/models}" method="post">
+                    <td class="input-group">
+                        <div class="input-group-prepend">
+                            <button id="supplier-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
+                        </div>
+                        <select class="selectpicker" id="dropDownList" multiple>
+                            <option th:each="supplier:${suppliers}" th:value="${supplier.name}" th:text="${supplier.name}"></option>
+                        </select>
+                    </td>
+                </form>
             </tr>
         </thead>
         <tbody>

@@ -1,6 +1,7 @@
 package fr.philobox.gtsav.controllers;
 
 import fr.philobox.gtsav.entities.ModelEntity;
+import fr.philobox.gtsav.entities.SupplierEntity;
 import fr.philobox.gtsav.services.ModelManagementService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -62,6 +63,9 @@ public class ModelManagementController {
                     .collect(Collectors.toList());
         }
         model.addAttribute("totalPages", totalPages);
+
+        List<SupplierEntity> suppliers = modelManagementService.findAllSupplier();
+        model.addAttribute("suppliers", suppliers);
 
         return "models";
     }
