@@ -40,6 +40,16 @@ public class ModelManagementController {
         return selectModels(model, page, size, name);
     }
 
+    @PostMapping(path = "/add-model")
+    public String addModel(Model model,
+                           @RequestParam(name = "name", required = true) String name,
+                           @RequestParam(name = "supplier", required = true) String supplier
+    ){
+
+        return "models";
+    }
+
+
     public String selectModels(Model model, Integer page, Integer size, String name) {
 
         if (page < 1 )
