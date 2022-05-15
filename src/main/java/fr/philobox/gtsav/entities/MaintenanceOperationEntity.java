@@ -36,6 +36,11 @@ public class MaintenanceOperationEntity {
     @JoinColumn(name = "TIC_ID")
     private TicketEntity ticket;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRO_ID")
+    private ProviderEntity provider;
+
 
 
 
