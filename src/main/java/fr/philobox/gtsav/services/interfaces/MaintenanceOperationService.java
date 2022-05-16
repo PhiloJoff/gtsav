@@ -16,7 +16,7 @@ public class MaintenanceOperationService implements IProviderService, IMaintenan
     private ProviderRepository providerRepository;
 
     public ProviderEntity addProvider(ProviderEntity providerEntity) {
-        return providerService.addProvider(providerEntity);
+        return providerRepository.save(providerEntity);
     }
 
     @Override
@@ -44,10 +44,10 @@ public class MaintenanceOperationService implements IProviderService, IMaintenan
         return null;
     }
 
-    public ProviderEntity updateProvider(ProviderEntity providerEntity)
+    public ProviderEntity updateProvider(ProviderEntity providerEntity) { return providerRepository.save(providerEntity);}
 
     public MaintenanceOperationEntity addMaintenanceOperation(MaintenanceOperationEntity mop) {
-        return maintenanceOperationService.addMaintenanceOperation(mop);
+        return maintenanceOperationRepository.save(mop);
     }
 
     @Override
