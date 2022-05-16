@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -39,5 +40,11 @@ public class ModelEntity {
     @JoinTable(name = "MODEL_TYPE", joinColumns = { @JoinColumn(name = "MOD_ID") }, inverseJoinColumns = { @JoinColumn(name = "TYP_ID") })
     private List<TypeEntity> types;
 
+    public ModelEntity(String name, SupplierEntity supplier) {
+        this.name = name;
+        this.supplier = supplier;
+        this.tickets = new ArrayList<>();
+        this.types = new ArrayList<>();
+    }
 
 }
