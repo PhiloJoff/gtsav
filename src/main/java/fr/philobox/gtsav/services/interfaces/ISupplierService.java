@@ -12,7 +12,7 @@ public interface ISupplierService {
     SupplierEntity addSupplier(SupplierEntity supplier);
     boolean deleteSupplier(UUID id);
     SupplierEntity editSupplier(SupplierEntity supplier);
-    SupplierEntity findByName(String name);
+    SupplierEntity findSupplierByName(String name);
 
     List<SupplierEntity> findAllSupplier();
     Page<SupplierEntity> findAllSupplier(PageRequest pageRequest);

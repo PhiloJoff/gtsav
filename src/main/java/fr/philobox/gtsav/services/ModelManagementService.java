@@ -23,9 +23,19 @@ public class ModelManagementService implements IModelService, ISupplierService {
     private SupplierRepository supplierRepository;
 
     @Override
-    public ModelEntity addModel(ModelEntity model) {
-        model.setId(UUID.randomUUID());
+    public ModelEntity addModel(ModelEntity model){
         return modelRepository.save(model);
+    }
+
+
+    public ModelEntity addModel(String name, String supplierName) throws Exception {
+
+        SupplierEntity supplierEntity = supplierRepository.findByName(supplierName);
+        if(supplierEntity == null)
+            throw new Exception("Supplier not found");
+        ModelEntity model = new ModelEntity(name, supplierEntity);
+        model.setId(UUID.randomUUID());
+        return this.addModel(model);
     }
 
     @Override
@@ -83,7 +93,7 @@ public class ModelManagementService implements IModelService, ISupplierService {
     }
 
     @Override
-    public SupplierEntity findByName(String name) {
+    public SupplierEntity findSupplierByName(String name) {
         return supplierRepository.findByName(name);
     }
 

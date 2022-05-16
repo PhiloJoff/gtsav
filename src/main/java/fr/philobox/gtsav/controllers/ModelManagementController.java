@@ -44,8 +44,8 @@ public class ModelManagementController {
     public String addModel(Model model,
                            @RequestParam(name = "name", required = true) String name,
                            @RequestParam(name = "supplier", required = true) String supplier
-    ){
-
+    ) throws Exception {
+        ModelEntity modelEntity = modelManagementService.addModel(name, supplier);
         return "models";
     }
 
