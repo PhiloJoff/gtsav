@@ -8,6 +8,4 @@ import java.awt.print.Pageable;
 import java.util.UUID;
 
 public interface MaintenanceOperationRepository extends JpaRepository<MaintenanceOperationEntity, UUID> {
-    MaintenanceOperationEntity findByName(String name);
-    Page<MaintenanceOperationEntity> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
 }
