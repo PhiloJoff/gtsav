@@ -1,17 +1,21 @@
-package fr.philobox.gtsav.services.interfaces;
+package fr.philobox.gtsav.services;
 
 import fr.philobox.gtsav.entities.MaintenanceOperationEntity;
 import fr.philobox.gtsav.entities.ProviderEntity;
 import fr.philobox.gtsav.repositories.MaintenanceOperationRepository;
 import fr.philobox.gtsav.repositories.ProviderRepository;
+import fr.philobox.gtsav.services.interfaces.IMaintenanceOperationService;
+import fr.philobox.gtsav.services.interfaces.IProviderService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 @AllArgsConstructor
-public class MaintenanceOperationService implements IProviderService, IMaintenanceOperationService {
+public class ProviderManagementService implements IProviderService, IMaintenanceOperationService {
     private MaintenanceOperationRepository maintenanceOperationRepository;
     private ProviderRepository providerRepository;
 
@@ -35,8 +39,8 @@ public class MaintenanceOperationService implements IProviderService, IMaintenan
     }
 
     @Override
-    public Page<ProviderEntity> findAllProvider(Pageable Pageable) {
-        return null;
+    public Page<ProviderEntity> findAllProvider(Pageable pageable) {
+        return providerRepository.findAll(pageable);
     }
 
     @Override
@@ -61,17 +65,8 @@ public class MaintenanceOperationService implements IProviderService, IMaintenan
     }
 
     @Override
-    public MaintenanceOperationEntity findMaintenanceOperationByName(String name) {
-        return null;
-    }
-
-    @Override
     public Page<MaintenanceOperationEntity> findAllMaintenanceOperation(Pageable Pageable) {
         return null;
     }
 
-    @Override
-    public Page<MaintenanceOperationEntity> findAllMaintenanceOperationByNameContains(String name, Pageable pageable) {
-        return null;
-    }
 }
