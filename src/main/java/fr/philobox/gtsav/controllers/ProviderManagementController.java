@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.awt.print.Pageable;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @AllArgsConstructor
@@ -28,6 +31,11 @@ public class ProviderManagementController {
         model.addAttribute("size", size);
         model.addAttribute("currentPage", providerPage);
         model.addAttribute("providers", providerPage.getContent());
+        List<Integer> totalPages = null;
+        if (providerPage.getTotalPages() > 0) {
+            totalPages = IntStream.range(0, providerPage.getTotalPages()).boxed().collect(Collectors.toList());
+        }
+        model.addAttribute("totalPages", totalPages);
         return "providers";
     }
 }

@@ -12,13 +12,13 @@
         <thead class="thead-light">
             <tr>
                 <th th:if="${true}">Id</th>
-                <th>Description</th>
+                <th>Name</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="p:${providers}">
                 <td th:if="${true}" th:text="${p.id}"></td>
-                <td th:text="${p.description}"></td>
+                <td th:text="${p.name}"></td>
             </tr>
         </tbody>
     </table>
@@ -28,17 +28,17 @@
                 <span class="page-link" >&laquo;</span>
             </li>
             <li class="page-item" th:if="${currentPage.number > 0}">
-                <a class="page-link" th:href="@{/models(page=${currentPage.number - 1})}">&laquo;</a>
+                <a class="page-link" th:href="@{/providers(page=${currentPage.number - 1})}">&laquo;</a>
             </li>
             <li th:each="p:${totalPages}" class="page-item" th:classappend="${p == currentPage.number } ? active">
                 <span th:if="${p == currentPage.number }" class="page-link disabled"  th:text="${p + 1}"></span>
-                <a th:if="${p != currentPage.number }" class="page-link" th:text="${p + 1}" th:href="@{/models(page=${p + 1})}"></a>
+                <a th:if="${p != currentPage.number }" class="page-link" th:text="${p + 1}" th:href="@{/providers(page=${p + 1})}"></a>
             </li>
             <li class="page-item disabled" th:if="${currentPage.number == totalPages.size() - 1}">
                 <span class="page-link">&raquo;</span>
             </li>
             <li class="page-item" th:if="${currentPage.number < totalPages.size() - 1}">
-                <a class="page-link" th:href="@{/models(page=${currentPage.number + 1})}">&raquo;</a>
+                <a class="page-link" th:href="@{/provider(page=${currentPage.number + 1})}">&raquo;</a>
             </li>
         </ul>
     </nav>
