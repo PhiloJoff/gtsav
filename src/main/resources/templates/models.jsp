@@ -14,26 +14,27 @@
                 <th th:if="${false}">Id</th>
                 <th>Nom</th>
                 <th>Fournisseur</th>
+                <th></th>
             </tr>
             <tr>
-                <td th:if="${false}" th:text="est"></td>
+                <th th:if="${false}" th:text="est"></th>
                 <form id="modelForm" action="#" th:action="@{/models}" method="post">
-                    <td class="input-group">
-                        <div class="input-group-prepend">
+                    <th class="input-group col-xs-2">
+                        <div class="input-group-prepend col-xs-2">
                             <button id="name-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
                         </div>
                         <input type="text" class="form-control" placeholder="Chercher" aria-label="Name" name="name" th:value="${name}">
-                    </td>
+                    </th>
                 </form>
                 <form id="supplierForm" action="#" th:action="@{/models}" method="post">
-                    <td class="input-group">
+                    <th class="input-group">
                         <div class="input-group-prepend">
                             <button id="supplier-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
                         </div>
                         <select class="selectpicker" id="dropDownList" multiple>
                             <option th:each="supplier:${suppliers}" th:value="${supplier.name}" th:text="${supplier.name}"></option>
                         </select>
-                    </td>
+                    </th>
                 </form>
             </tr>
         </thead>
@@ -42,6 +43,7 @@
                 <td th:if="${false}" th:text="${m.id}"></td>
                 <td th:text="${m.name}"></td>
                 <td th:text="${m.supplier.name}"></td>
+                <td><button class="input-group-text" type="submit" >Edit</button></td>
             </tr>
         </tbody>
     </table>
