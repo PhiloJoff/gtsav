@@ -23,7 +23,7 @@ public class ProviderEntity {
 
     @NotNull
     @NotEmpty
-    @Column(name = "PRO_NAME", length = 50)
+    @Column(name = "PRO_NAME", length = 50, unique = true)
     private String name;
 
 
