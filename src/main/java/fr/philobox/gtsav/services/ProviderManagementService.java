@@ -60,13 +60,10 @@ public class ProviderManagementService implements IProviderService, IMaintenance
     }
 
     @Override
-    public MaintenanceOperationEntity editMaintenanceOperation(MaintenanceOperationEntity maintenanceOperation) {
-        return null;
-    }
-
-    @Override
     public Page<MaintenanceOperationEntity> findAllMaintenanceOperation(Pageable Pageable) {
         return null;
     }
+
+
 
 }

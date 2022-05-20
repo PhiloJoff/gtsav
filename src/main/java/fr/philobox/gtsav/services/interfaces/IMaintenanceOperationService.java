@@ -10,6 +10,5 @@ public interface IMaintenanceOperationService {
     MaintenanceOperationEntity addMaintenanceOperation(MaintenanceOperationEntity maintenanceOperation);
     boolean deleteMaintenanceOperation(UUID id);
     Page<MaintenanceOperationEntity> findAllMaintenanceOperation(Pageable Pageable);
-    Page<MaintenanceOperationEntity> findAllMaintenanceOperationByNameContains(String name, Pageable pageable);
 
 }
