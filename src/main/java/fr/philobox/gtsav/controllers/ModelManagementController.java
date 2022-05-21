@@ -40,12 +40,21 @@ public class ModelManagementController {
         return selectModels(model, page, size, name);
     }
 
+    @GetMapping(path = "/add-model")
+    public String newModel(Model model
+    ) throws Exception {
+        model.addAttribute("model", new ModelEntity());
+        model.addAttribute("suppliers", modelManagementService.findAllSupplier());
+        return "add-model";
+    }
+
     @PostMapping(path = "/add-model")
     public String addModel(Model model,
                            @RequestParam(name = "name", required = true) String name,
-                           @RequestParam(name = "supplier", required = true) String supplier
+                           @RequestParam(name = "id", required = true) String supplierId
     ) throws Exception {
-        ModelEntity modelEntity = modelManagementService.addModel(name, supplier);
+        ModelEntity modelEntity = modelManagementService.addModel(name, supplierId);
+        model.addAttribute("model", modelEntity);
         return "models";
     }
 

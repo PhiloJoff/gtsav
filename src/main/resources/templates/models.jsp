@@ -12,8 +12,8 @@
         <thead class="thead-light">
             <tr>
                 <th th:if="${false}">Id</th>
-                <th>Nom</th>
-                <th>Fournisseur</th>
+                <th>Name</th>
+                <th>Supplier</th>
                 <th></th>
             </tr>
             <tr>

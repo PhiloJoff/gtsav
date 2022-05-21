@@ -27,10 +27,10 @@ public class ModelManagementService implements IModelService, ISupplierService {
         return modelRepository.save(model);
     }
 
-
-    public ModelEntity addModel(String name, String supplierName) throws Exception {
-
-        SupplierEntity supplierEntity = supplierRepository.findByName(supplierName);
+    public ModelEntity addModel(String name, String supplierId) throws Exception {
+        if (modelRepository.findByName(name) != null)
+            throw new Exception("Model exist");
+        SupplierEntity supplierEntity = supplierRepository.findById(UUID.fromString(supplierId)).orElse(null);
         if(supplierEntity == null)
             throw new Exception("Supplier not found");
         ModelEntity model = new ModelEntity(name, supplierEntity);
@@ -101,5 +101,5 @@ public class ModelManagementService implements IModelService, ISupplierService {
     public List<SupplierEntity> findAllSupplier() { return supplierRepository.findAll();}
 
     @Override
-    public Page<SupplierEntity> findAllSupplier(PageRequest pageRequest) { return supplierRepository.findAll(pageRequest);}
+    public Page<SupplierEntity> findAllSupplier(Pageable pageable) { return supplierRepository.findAll(pageable);}
 }
