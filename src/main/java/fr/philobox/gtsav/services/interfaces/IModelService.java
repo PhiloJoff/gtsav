@@ -15,5 +15,6 @@ public interface IModelService {
     ModelEntity findModelByName(String name);
     Page<ModelEntity> findAllModel(Pageable Pageable);
     Page<ModelEntity> findAllModelByNameContains(String name, Pageable pageable);
+    Page<ModelEntity> findAllModelBySupplierName(String name, Pageable pageable);
 
 }

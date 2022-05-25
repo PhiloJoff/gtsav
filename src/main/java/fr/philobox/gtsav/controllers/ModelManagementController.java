@@ -5,6 +5,7 @@ import fr.philobox.gtsav.entities.SupplierEntity;
 import fr.philobox.gtsav.services.ModelManagementService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,19 +28,38 @@ public class ModelManagementController {
     @GetMapping(path = "/models")
     public String getModels(Model model,
                             @RequestParam(name = "page", defaultValue = "1") Integer page,
-                            @RequestParam(name="size", defaultValue = "10") Integer size,
-                            @RequestParam(name = "name", defaultValue = "") String name
+                            @RequestParam(name="size", defaultValue = "15") Integer size,
+                            @RequestParam(name = "name", defaultValue = "") String name,
+                            @RequestParam(name = "supplier", defaultValue = "") String supplier
     ){
-        return selectModels(model, page, size, name);
-    }
+        if (page < 1 )
+            return "redirect:/models";
+        if (size < 5)
+            size = 5;
+        Page<ModelEntity> pagesModel = modelManagementService.findAllModel(PageRequest.of(page - 1, size));
+        if (!supplier.isEmpty() && supplier != null) {
+            System.out.println(supplier);
+            pagesModel = modelManagementService.findAllModelBySupplierName(supplier, PageRequest.of(page-1,size));
+            model.addAttribute("supplier", supplier);
+        }
+        if (!name.isEmpty() && name != null) {
+            pagesModel = modelManagementService.findAllModelByNameContains(name, PageRequest.of(page-1,size));
+            model.addAttribute("name", name);
+        }
+        model.addAttribute("models", pagesModel.getContent());
+        model.addAttribute("currentPage", pagesModel);
+        List<Integer> totalPages = null;
+        if (pagesModel.getTotalPages() > 0){
+            totalPages = IntStream.rangeClosed(0,pagesModel.getTotalPages() - 1)
+                    .boxed()
+                    .collect(Collectors.toList());
+        }
+        model.addAttribute("totalPages", totalPages);
 
-    @PostMapping(path = "/models")
-    public String postModels(Model model,
-                             @RequestParam(name = "page", defaultValue = "1") Integer page,
-                             @RequestParam(name="size", defaultValue = "10") Integer size,
-                             @RequestParam(name = "name", defaultValue = "") String name
-    ){
-        return selectModels(model, page, size, name);
+        List<SupplierEntity> suppliers = modelManagementService.findAllSupplier();
+        model.addAttribute("suppliers", suppliers);
+
+        return "models";
     }
 
     @GetMapping(path = "/add-model")
@@ -58,34 +80,12 @@ public class ModelManagementController {
         return "models";
     }
 
-
-    public String selectModels(Model model, Integer page, Integer size, String name) {
-
-        if (page < 1 )
-            return "redirect:/models";
-        if (size < 5)
-            size = 5;
-        Page<ModelEntity> pagesModel = modelManagementService.findAllModel(PageRequest.of(page - 1, size));
-        if (!name.isEmpty() && name != null) {
-            System.out.println(name);
-            System.out.println(page);
-            System.out.println(size);
-            pagesModel = modelManagementService.findAllModelByNameContains(name, PageRequest.of(page - 1, size));
-            model.addAttribute("name", name);
-        }
-        model.addAttribute("models", pagesModel.getContent());
-        model.addAttribute("currentPage", pagesModel);
-        List<Integer> totalPages = null;
-        if (pagesModel.getTotalPages() > 0){
-            totalPages = IntStream.rangeClosed(0,pagesModel.getTotalPages() - 1)
-                    .boxed()
-                    .collect(Collectors.toList());
-        }
-        model.addAttribute("totalPages", totalPages);
-
-        List<SupplierEntity> suppliers = modelManagementService.findAllSupplier();
-        model.addAttribute("suppliers", suppliers);
-
-        return "models";
+    @GetMapping(path = "/delete-model")
+    public String deleteModel(Model model,
+                              @RequestParam(name = "id", required = true) String id
+    ) throws Exception {
+        modelManagementService.deleteModel(UUID.fromString(id));
+        return "redirect:/models";
     }
+
 }

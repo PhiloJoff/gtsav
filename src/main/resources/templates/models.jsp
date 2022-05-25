@@ -6,36 +6,45 @@
     <meta charset="UTF-8">
     <title>Models</title>
     <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="webjars/bootstrap-icons/1.8.2/font/bootstrap-icons.css">
 </head>
 <body>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover table-sm">
         <thead class="thead-light">
             <tr>
                 <th th:if="${false}">Id</th>
                 <th>Name</th>
                 <th>Supplier</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
             <tr>
                 <th th:if="${false}" th:text="est"></th>
-                <form id="modelForm" action="#" th:action="@{/models}" method="post">
-                    <th class="input-group col-xs-2">
-                        <div class="input-group-prepend col-xs-2">
-                            <button id="name-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
+                <th>
+                    <form id="modelForm" action="#" th:action="@{/models}" method="get">
+                        <div class="input-group">
+                            <div class="input-group-prepend col-xs-2">
+                                <button id="name-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Chercher" aria-label="Name" name="name" th:value="${name}">
+                            <input th:if="${supplier != null && supplier !=''}" type="hidden" th:value="${supplier}">
                         </div>
-                        <input type="text" class="form-control" placeholder="Chercher" aria-label="Name" name="name" th:value="${name}">
-                    </th>
-                </form>
-                <form id="supplierForm" action="#" th:action="@{/models}" method="post">
-                    <th class="input-group">
-                        <div class="input-group-prepend">
-                            <button id="supplier-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
+                    </form>
+                </th>
+                <th>
+                    <form id="supplierForm" action="#" th:action="@{/models}" method="get" th:object="${supplier}">
+                        <div  class="input-group">
+                            <div class="input-group-prepend">
+                                <button id="supplier-submit" class="input-group-text" type="submit" >&#x1F50D;</button>
+                            </div>
+                            <select class="form-select" name="supplier" >
+                                <option value="">Select one supplier</option>
+                                <option th:each="sup:${suppliers}" th:value="${sup.name}" th:text="${sup.name}" th:selected="${sup.name} == ${supplier}"></option>
+                            </select>
+                            <input th:if="${name != null && name !=''}" type="text" th:value="${name}">
                         </div>
-                        <select class="selectpicker" id="dropDownList" multiple>
-                            <option th:each="supplier:${suppliers}" th:value="${supplier.name}" th:text="${supplier.name}"></option>
-                        </select>
-                    </th>
-                </form>
+                    </form>
+                </th>
+                <th><button type="button" class="btn btn-primary"><i class="bi bi-plus-square"></i> Add model</button></th>
             </tr>
         </thead>
         <tbody>
@@ -43,7 +52,11 @@
                 <td th:if="${false}" th:text="${m.id}"></td>
                 <td th:text="${m.name}"></td>
                 <td th:text="${m.supplier.name}"></td>
-                <td><button class="input-group-text" type="submit" >Edit</button></td>
+                <td>
+                    <a type="button" class="btn"><i class="bi bi-eye-fill"></i></a>
+                    <a type="button" class="btn"><i class="bi bi-pencil-fill text-success"></i></a>
+                    <a type="button" class="btn" th:href="@{/delete-model(id=${m.id})}"><i class="bi bi-trash-fill text-danger"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -57,7 +70,8 @@
             </li>
             <li th:each="p:${totalPages}" class="page-item" th:classappend="${p == currentPage.number } ? active">
                 <span th:if="${p == currentPage.number }" class="page-link disabled"  th:text="${p + 1}"></span>
-                <a th:if="${p != currentPage.number }" class="page-link" th:text="${p + 1}" th:href="@{/models(page=${p + 1})}"></a>
+                <a th:if="${p != currentPage.number && name != '' && name != null}" class="page-link" th:text="${p + 1}" th:href="@{/models(page=${p + 1}, name=${name})}"></a>
+                <a th:if="${p != currentPage.number && (name == '' || name == null)}" class="page-link" th:text="${p + 1}" th:href="@{/models(page=${p + 1})}"></a>
             </li>
             <li class="page-item disabled" th:if="${currentPage.number == totalPages.size() - 1}">
                 <span class="page-link">&raquo;</span>

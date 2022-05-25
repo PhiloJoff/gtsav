@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface ModelRepository extends JpaRepository<ModelEntity, UUID> {
     ModelEntity findByName(String name);
     Page<ModelEntity> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
+    Page<ModelEntity> findAllBySupplierNameContainsIgnoreCase(String supplierName, Pageable pageable);
+
 }

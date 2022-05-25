@@ -71,6 +71,9 @@ public class ModelManagementService implements IModelService, ISupplierService {
     public Page<ModelEntity> findAllModelByNameContains(String name, Pageable pageable) { return modelRepository.findAllByNameContainsIgnoreCase(name, pageable); }
 
     @Override
+    public Page<ModelEntity> findAllModelBySupplierName(String supplierName, Pageable pageable) { return modelRepository.findAllBySupplierNameContainsIgnoreCase(supplierName, pageable);   }
+
+    @Override
     public SupplierEntity addSupplier(SupplierEntity supplier) {
         supplier.setId(UUID.randomUUID());
         return supplierRepository.save(supplier);
